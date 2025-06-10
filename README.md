@@ -1,10 +1,17 @@
 # API Test Framework for User Service
 
-## Overview
+## This Project vs. My Previous API-Testing-Template
 
-This project is a robust automated API testing framework developed in Python to validate the functionality, reliability, and data integrity of RESTful API endpoints related to user management. It ensures the API meets expected behavior by verifying response status codes, data structure, and content validation, such as email formats.
+This framework builds upon lessons learned from my earlier project [`API-Testing-Template`](https://github.com/blmcdowe/API-Testing-Template), with key improvements:
 
-The framework is built with best practices for maintainability, scalability, and ease of extension, making it suitable for real-world QA automation needs.
+- **Better Project Structure**: Utilities (`utils/`) are separated from tests, making it easier to scale.
+-  **Pure pytest Syntax**: Uses function-based tests for simplicity and compatibility with modern pytest plugins.
+- ️ **CLI Support**: Includes a custom command-line interface to run tests, ideal for CI/CD pipelines or local automation.
+-  **Cleaner Imports and Setup**: All functions, validations, and helpers are modular and reusable.
+-  **Root-Level Integration**: `run_testcli.py` is placed at the project root for immediate terminal access.
+-  **`.gitignore` and License**: Cleaned for production use and open-source ready with MIT license.
+
+This new project reflects a more real-world testing framework and is better suited for showcasing automation engineering skills to employers or freelance clients.
 
 ---
 
