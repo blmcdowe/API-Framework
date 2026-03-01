@@ -1,195 +1,220 @@
-# API Test Framework for User Service
+# API Test Framework
+![Python](https://img.shields.io/badge/python-3.13-blue?logo=python&logoColor=white)
+![PyTest](https://img.shields.io/badge/pytest-8.3.5-orange?logo=pytest&logoColor=white)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## This Project vs. My Previous API-Testing-Template
+## Overview
 
-This framework builds upon lessons learned from my earlier project [`API-Testing-Template`](https://github.com/blmcdowe/API-Testing-Template), with key improvements:
+This project is a professional API testing framework using Python and PyTest. It includes:
 
-- **Better Project Structure**: Utilities (`utils/`) are separated from tests, making it easier to scale.
--  **Pure pytest Syntax**: Uses function-based tests for simplicity and compatibility with modern pytest plugins.
-- ️ **CLI Support**: Includes a custom command-line interface to run tests, ideal for CI/CD pipelines or local automation.
--  **Cleaner Imports and Setup**: All functions, validations, and helpers are modular and reusable.
--  **Root-Level Integration**: `run_testcli.py` is placed at the project root for immediate terminal access.
--  **`.gitignore` and License**: Cleaned for production use and open-source ready with MIT license.
+* Automated API tests with verbose output
 
-This new project reflects a more real-world testing framework and is better suited for showcasing automation engineering skills to employers or freelance clients.
+* JSON snapshots for QA evidence
 
----
+* HTML reports for human-readable, portfolio-ready results
 
-## Key Features
+* JUnit XML reports for CI/CD integration
 
-- Comprehensive testing of REST API endpoints including status codes and response payload validation
-- Validation of critical data fields and formats (e.g., email addresses)
-- Modular design separating API request logic and validation utilities
-- Uses `pytest` for expressive and concise test definitions without boilerplate code
-- Easily extensible to add new endpoints, test cases, and validators
-- Designed for integration into CI/CD pipelines and automated testing workflows
+* Markdown-style test titles and descriptions for clarity
 
----
+This setup demonstrates real-world QA best practices and is designed for both local testing and CI/CD pipelines.
 
-## Skills Demonstrated
-
-This project showcases proficiency in:
-
-- **Python programming**: Writing clear, maintainable test code and utility modules
-- **API testing**: Using `requests` to interact with RESTful services and validate responses
-- **Test automation frameworks**: Implementing test cases using `pytest` including assertions and fixtures
-- **Data validation**: Creating and using custom validators such as email format checking
-- **Code organization**: Modularizing code for separation of concerns and reusability
-- **Version control & collaboration**: Organizing project structure and documentation for team use
-- **Continuous Integration**: Ready to integrate with CI pipelines for automated regression testing
-
----
-
-## Prerequisites
-
-- Python 3.10 or higher
-- `requests` library for HTTP calls
-- `pytest` for running tests
-
-Dependencies can be installed via:
-
-```bash
-pip install -r requirements.txt
-```
-## Setup and Configuration
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/api-test-framework.git
-
-cd api-test-framework
-```
-2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-## Configure your environment
-
-Modify the settings.py file to specify:
-
-* BASE_URL: The base URL of the API under test (e.g., https://jsonplaceholder.typicode.com)
-
-* Any authentication tokens or headers if required by your API
-
-Example:
-
-python
-```bash
-BASE_URL = "https://jsonplaceholder.typicode.com"
-```
-
-## Running the Tests
-Run all tests with:
-
-```bash
-pytest
-```
-Run tests from a specific file:
-```bash
-pytest tests/test_users.py
-```
-Verbose output can be enabled with:
-
-```bash
-pytest -v
-```
-
-Project Structure
-```bash
-api-test-framework/
+## Project Structure
+````
+API-Test-Framework/
 │
-├── tests/                    # Test files organized by resource or feature
-│   ├── test_users.py         # Tests related to User API endpoints
-│   └── ...                  
-│
-├── utils/                    # Utility modules
-│   ├── api_helpers.py        # Functions to call API endpoints (e.g., get_users)
-│   └── validators.py         # Custom validation functions (e.g., is_valid_email)
-│
-├── settings.py               # Configuration file for API base URLs and tokens
-├── requirements.txt          # Python dependencies list
-└── README.md                 # Project documentation
-```
-Example Test Case
-```bash
-def test_all_user_emails_are_valid():
-    response = get_users()
-    users = response.json()
-    for user in users:
-        assert is_valid_email(user['email']), f"Invalid email found: {user['email']}"      
-```
-Extending the Framework
+├─ utils/
+│   ├─ api_helpers.py       # API helper functions (e.g., get_users)
+│   └─ validators.py        # Validators (e.g., is_valid_email)
+├─ tests/
+│   ├─ test_users.py        # PyTest test cases
+│   └─ snapshots/           # JSON snapshots saved per test
+├─ reports/                 # HTML and JUnit XML reports
+└─ pytest.ini (optional)
+````
+## Setup
+### 1. Python Environment
 
-* Add new API tests: Create new test files or functions in the tests directory targeting additional endpoints or edge cases.
+* Python 3.13+ recommended
 
-* Enhance validators: Implement more comprehensive validation utilities (e.g., JSON schema validation).
-
-* Implement fixtures: Use pytest fixtures to manage test setup and teardown, e.g., for authentication tokens or test data preparation.
-
-* Integrate CI/CD: Connect the framework with CI tools like GitHub Actions, Jenkins, or Travis CI for automated test runs on each commit.
-
-* Add reporting: Incorporate test reporting tools or plugins for enhanced test result visualization.
-
-### Terminal Usage
-
-To run the automated tests from the command line, follow these steps:
-
-Open your terminal or command prompt.
-
-Navigate to the root folder of the project where run_testcli.py is located. For example:
-
-```bash
-cd path/to/your/project/root
+* Install dependencies (terminal):
+```Bash
+pip install pytest pytest-html
 ```
 
-Run the test CLI script using Python:
+* Optional: pytest-asyncio if testing asynchronous APIs
 
-```bash
-python run_testcli.py
+### 2. Handling Python Path
+
+To ensure Python can find the utils module:
+
+**Option A – Temporary for terminal** (OS Powershell/Pycharm Terminal):
+```Powershell
+cd "C:\Users\bgroo\PycharmProjects\API-Test-Framework"
+$env:PYTHONPATH="${PWD}"
+``` 
+**Option B – Permanent for PyCharm terminal** :
+
+Use a .env file in project root:
+```Bash
+PYTHONPATH=C:\Users\YourUserName\PycharmProjects\API-Test-Framework
 ```
-This will execute all the tests in the project and display the results directly in your terminal.
-## Contributing
-Contributions and improvements are welcome! Please fork the repo and submit pull requests for review.
 
-## Contact
-Byron McDowell  
-Email: [bgroot2021@gmail.com](mailto:bgroot2021@gmail.com)  
-GitHub: [github.com/blmcdowe](https://github.com/blmcdowe)  
-LinkedIn: [linkedin.com/in/byronmcdowell](https://linkedin.com/in/byronmcdowell)
+Configure **Run/Debug Configurations → Environment → Env File** in PyCharm.
+
+This allows the framework to import helper modules correctly in both the terminal and UI.
+
+## Running Tests
+### From PyCharm UI
+
+1. Run/Debug Configurations → + → Python tests → pytest
+
+2. Target: tests/ folder or project root
+
+3. Working directory: project root
+
+4. Additional arguments:
+```` Plain text
+-v --html=reports/report.html --self-contained-html --junitxml=reports/junit-report.xml
+````
+5. **Environment vairables:** set PYTHONPATH as above if necessary
+6. Click **Run**
+
+## From Terminal/PowerShell
+```Power Shell
+cd "C:\Users\bgroo\PycharmProjects\API-Test-Framework"
+$env:PYTHONPATH="${PWD}"
+pytest -v --html=reports/report.html --self-contained-html --junitxml=reports/junit-report.xml
+````
+## Docker Validation
+
+All API tests are fully containerized using Docker, allowing reproducible test execution and report generation.
+
+### **Prerequisites**
+- Docker installed on your machine
+- Optional: PowerShell or terminal access
+
+### **Build Docker Image**
+Run from project root:
+
+```powershell
+docker buildx build -t api-test-framework .
+```
+### Run Tests in Docker
+
+This executes all tests in tests/ and generates HTML & JUnit reports, plus JSON snapshots:
+
+docker run --rm `
+  -e PYTHONPATH=/app `
+  -v ${PWD}/reports:/app/reports `
+  -v ${PWD}/tests/snapshots:/app/tests/snapshots `
+  api-test-framework
+
+**Explanation:**
+
+`PYTHONPATH=/app` → ensures Python can import utils/ and config/.
+
+`reports/` → HTML report and JUnit XML are persisted to host machine.
+
+`tests/snapshots/` → JSON snapshots of API responses are saved for QA validation.
+
+### Output
+* HTML report: `reports/report.html`
+
+* JUnit XML report: `reports/junit-report.xml`
+
+* Snapshots: `tests/snapshots/*.json`
+  
+*This setup ensures portable, reproducible testing for QA, development, and CI/CD pipelines.*
 
 
+## Features
+
+### 1. Verbose Test Output
+* Use -v to show file name, function name, and pass/fail status in console.
+
+### 2. Snapshots
+
+* Tests save JSON snapshots of API responses to tests/snapshots/.
+
+* Snapshots are also embedded inline in the HTML report for QA review.
+
+### 3. HTML Report
+
+* Generated in reports/report.html
+
+* Human-readable, includes:
+
+    * Test titles and descriptions (Markdown)
+
+    * Inline JSON snapshots
+
+    * Pass/fail color coding
+  
+## **HTML SnapShot**
+
+![API-Test-Framework-Report.png](tests/snapshots/API-Test-Framework-Report.png)
+
+*Snapshot of PyTest HTML report showing test results and embedded snapshots.*
+
+### 4. JUnit XML Report
+
+* Generated in `reports/junit-report.xml`
+
+* Compatible with CI/CD pipelines (Jenkins, GitHub Actions, GitLab, etc.)
+
+## QA-Friendly Test Data Matrix
+
+| Test Case | API Endpoint | Input / Params | Expected Output | Snapshot / Notes |
+|-----------|-------------|----------------|----------------|-----------------|
+| `test_get_users_status_code` | `/users` | None | HTTP **200 OK** | Snapshot of full user list saved in `snapshots/` |
+| `test_get_users_length` | `/users` | None | **10 users** returned | JSON snapshot shows array of 10 user objects |
+| `test_user_fields` | `/users` | None | Each user object contains: `id`, `name`, `email` | Snapshot highlights missing or invalid fields if test fails |
+| `test_all_user_emails_are_valid` | `/users` | None | All `email` fields are valid format | Snapshot shows invalid emails if any exist |
+| `test_user_1_name_is_leanne_graham` | `/users/1` | `id=1` | `name` equals `"Leanne Graham"` | Snapshot stores single user object for verification |
+
+
+### Best Practices
+
+* Keep snapshots/ and reports/ in version control only if suitable for portfolio/demo.
+
+* Use Markdown-style labels in test docstrings for clarity (python):
+
+```Python
+"""
+# Title: Verify Users Endpoint Status Code
+# Description: Ensure the /users endpoint responds with HTTP 200 OK.
+"""
+```
+* Use `save_snapshot(name, data, request)` to save API responses and attach them to HTML report.
+
+* Always run tests from the project root to avoid import errors.
+
+
+## CI/CD Integration
+
+* **JUnit XML** allows pipelines to parse test results automatically
+
+* HTML reports can be archived for QA review
+
+* Snapshots provide historical API response verification
+
+## Author
+
+**Byron McDowell**  
+
+- LinkedIn: [linkedin.com/in/byron-mcdowell](https://www.linkedin.com/in/byron-mcdowell)  
+- GitHub: [github.com/byron-mcdowell](https://github.com/byron-mcdowell)  
+
+Feel free to connect or explore more of my projects.
 ## License
 
-This project is licensed under the MIT License:
+This project is licensed under the [MIT License](./LICENSE).  
+See the `LICENSE` file for full details.
 
-MIT License
-
-Copyright (c) 2025 Byron McDowell
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-
-
----
-
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 
 
