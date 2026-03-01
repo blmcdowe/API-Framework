@@ -155,7 +155,8 @@ docker run --rm `
   
 ## **HTML SnapShot**
 
-![API-Test-Framework-Report.png](tests/snapshots/API-Test-Framework-Report.png)
+<img width="1358" height="592" alt="API-Test-Framework-Report" src="https://github.com/user-attachments/assets/cdfcf516-a490-45ab-8289-64fd8904cc33" />
+
 
 *Snapshot of PyTest HTML report showing test results and embedded snapshots.*
 
@@ -215,6 +216,7 @@ This project is licensed under the [MIT License](./LICENSE).
 See the `LICENSE` file for full details.
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
+
 
 
 
