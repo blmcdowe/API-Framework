@@ -52,14 +52,14 @@ To ensure Python can find the utils module:
 
 **Option A – Temporary for terminal** (OS Powershell/Pycharm Terminal):
 ```Powershell
-cd "C:\Users\bgroo\PycharmProjects\API-Test-Framework"
+cd "C:\Users\Your_Username\PycharmProjects\API-Test-Framework"
 $env:PYTHONPATH="${PWD}"
 ``` 
 **Option B – Permanent for PyCharm terminal** :
 
 Use a .env file in project root:
 ```Bash
-PYTHONPATH=C:\Users\YourUserName\PycharmProjects\API-Test-Framework
+PYTHONPATH=C:\Users\Your_UserName\PycharmProjects\API-Test-Framework
 ```
 
 Configure **Run/Debug Configurations → Environment → Env File** in PyCharm.
@@ -84,7 +84,7 @@ This allows the framework to import helper modules correctly in both the termina
 
 ## From Terminal/PowerShell
 ```Power Shell
-cd "C:\Users\bgroo\PycharmProjects\API-Test-Framework"
+cd "C:\Users\Your_Username\PycharmProjects\API-Test-Framework"
 $env:PYTHONPATH="${PWD}"
 pytest -v --html=reports/report.html --self-contained-html --junitxml=reports/junit-report.xml
 ````
@@ -216,6 +216,7 @@ This project is licensed under the [MIT License](./LICENSE).
 See the `LICENSE` file for full details.
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
+
 
 
 
